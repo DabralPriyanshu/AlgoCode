@@ -46,5 +46,18 @@ async function getProblem(req, res, next) {
     next(error);
   }
 }
+async function deleteProblem(req, res, next) {
+  try {
+    const deletedProblem = await problemService.deleteProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully deleted the problem",
+      error: {},
+      data: deletedProblem,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 
-module.exports = { addProblem, getProblems, getProblem };
+module.exports = { addProblem, getProblems, getProblem, deleteProblem };
