@@ -33,4 +33,18 @@ async function getProblems(req, res, next) {
   }
 }
 
-module.exports = { addProblem, getProblems };
+async function getProblem(req, res, next) {
+  try {
+    const problem = await problemService.getProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      error: {},
+      message: "Successfully fetched a problem",
+      data: problem,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { addProblem, getProblems, getProblem };

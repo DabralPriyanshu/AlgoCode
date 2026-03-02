@@ -4,5 +4,6 @@ const problemRouter = express.Router();
 
 problemRouter.post("/", problemController.addProblem);
 problemRouter.get("/", problemController.getProblems);
+problemRouter.get("/:id", problemController.getProblem);
 
 module.exports = problemRouter;
