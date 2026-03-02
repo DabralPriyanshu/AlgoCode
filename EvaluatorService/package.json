@@ -1,0 +1,27 @@
+{
+  "name": "evaluatorservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "build": "npx tsc ",
+    "watch": "npx tsc -w",
+    "prestart": "npm run build",
+    "start": "nodemon ./dist/server.js",
+    "dev": "npx concurrently --kill-others \"npm run watch\" \"npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "nodemon": "^3.1.14",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  }
+}
