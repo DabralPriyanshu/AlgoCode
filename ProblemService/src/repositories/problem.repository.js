@@ -29,9 +29,9 @@ class ProblemRepository {
     }
   }
 
-  async getProblem(problemId) {
+  async getProblem(id) {
     try {
-      const problem = await this.model.findById(problemId);
+      const problem = await this.model.findById(id);
       if (!problem) {
         throw new NotFoundError("Problem", id);
       }
