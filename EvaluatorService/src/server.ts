@@ -1,8 +1,8 @@
 import express, { type Express } from "express";
 import ENV from "./config/server.config.js";
 import apiRoutes from "./routes/index.js";
-import addJobToSampleQueue from "./producers/sampleQueueProducer.js";
-import sampleWorker from "./workers/sampleWorker.js";
+// import addJobToSampleQueue from "./producers/sampleQueueProducer.js";
+// import sampleWorker from "./workers/sampleWorker.js";
 import bullBoardAdapter from "./config/bullboard.config.js";
 const app: Express = express();
 app.use(express.json());
@@ -14,7 +14,7 @@ app.listen(ENV.PORT, () => {
   console.log(
     `BullBoard dashboard running on: http://localhost:${ENV.PORT}/ui`,
   );
-  sampleWorker("SampleQueue");
-  addJobToSampleQueue("SampleJob", { name: "Sanket", company: "Microsoft" }, 2);
-  addJobToSampleQueue("SampleJob", { name: "Sarthak", company: "Google" }, 1);
+  // sampleWorker("SampleQueue");
+  // addJobToSampleQueue("SampleJob", { name: "Sanket", company: "Microsoft" }, 2);
+  // addJobToSampleQueue("SampleJob", { name: "Sarthak", company: "Google" }, 1);
 });
