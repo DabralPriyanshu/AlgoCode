@@ -10,5 +10,6 @@ app.use("/api", apiRoutes);
 app.listen(ENV.PORT, () => {
   console.log(`Server started at http://localhost:${ENV.PORT}`);
   sampleWorker("SampleQueue");
-  addJobToSampleQueue("SampleJob", { name: "Sanket", company: "Microsoft" });
+  addJobToSampleQueue("SampleJob", { name: "Sanket", company: "Microsoft" }, 2);
+  addJobToSampleQueue("SampleJob", { name: "Sarthak", company: "Google" }, 1);
 });
