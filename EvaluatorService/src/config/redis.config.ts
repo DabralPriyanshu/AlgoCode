@@ -6,5 +6,5 @@ const redisConfig = {
   host: ENV.REDIS_HOST,
   maxRetriesPerRequest: null,
 };
-const redisConnection = new Redis(redisConfig);
+const redisConnection:any = new Redis(redisConfig);
 export default redisConnection;
