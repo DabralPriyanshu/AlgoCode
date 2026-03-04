@@ -1,5 +1,7 @@
 const fastify = require("fastify")({ logger: true });
+const app = require("./app");
 const PORT = 3002;
+fastify.register(app);
 fastify.get("/ping", async (req, res) => {
   return res.code(200).send({ message: "Submission service is alive" });
 });
