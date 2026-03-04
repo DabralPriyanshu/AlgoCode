@@ -4,7 +4,8 @@ import apiRoutes from "./routes/index.js";
 // import addJobToSampleQueue from "./producers/sampleQueueProducer.js";
 // import sampleWorker from "./workers/sampleWorker.js";
 import bullBoardAdapter from "./config/bullboard.config.js";
-import runPython from "./containers/runPythonDocker.js";
+import runJava from "./containers/runJavaDocker.js";
+// import runPython from "./containers/runPythonDocker.js";
 const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,13 +19,33 @@ app.listen(ENV.PORT, () => {
   // sampleWorker("SampleQueue");
   // addJobToSampleQueue("SampleJob", { name: "Sanket", company: "Microsoft" }, 2);
   // addJobToSampleQueue("SampleJob", { name: "Sarthak", company: "Google" }, 1);
-  const code = `x=input()
-y=input()
-print("Value of x  is ",x)
-print("Value of y  is ",y)
+  //   const code = `x=input()
+  // y=input()
+  // print("Value of x  is ",x)
+  // print("Value of y  is ",y)
+  // `;
+  //   const input = `100
+  // 200
+  // `;
+  //   runPython(code, input);
+
+  const code = `
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+
+        System.out.println("Input is " + input);
+
+        for (int i = 1; i <= input; i++) {
+            System.out.println(i);
+        }
+    }
+}
 `;
-  const input = `100
-200
-`;
-  runPython(code, input);
+  const inputCase = `10`;
+  runJava(code, inputCase);
 });
