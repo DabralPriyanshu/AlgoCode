@@ -1,5 +1,6 @@
 export const PYTHON_IMAGE = "python:3.8-slim";
 export const JAVA_IMAGE = "eclipse-temurin:11-jdk";
+export const CPP_IMAGE = "gcc:latest";
 
 //this will represent the header size of docker stream
 // docker stream header will contain data about type of  stdout/stderr and the length of data 4 byte for type 4 for length of data of chunk value except header

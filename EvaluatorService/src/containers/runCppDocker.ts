@@ -1,28 +1,28 @@
 import Docker from "dockerode";
 import createContainer from "./containerFactory.js";
 // import type { TestCases } from "../types/testCases.js"
-import { JAVA_IMAGE } from "../utils/constant.js";
+import { CPP_IMAGE } from "../utils/constant.js";
 import decodeDockerStream from "./dockerHelper.js";
 import pullImage from "./pullImage.js";
 
-async function runJava(code: string, inputTestCase: string) {
+async function runCpp(code: string, inputTestCase: string) {
   const rawLogBuffer: Buffer[] = [];
-  console.log("init a new java container");
- await pullImage(JAVA_IMAGE);
-  const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' >Main.java && javac Main.java && echo '${inputTestCase.replace(/'/g, `'\\"`)}' |java Main `; //creating a file so that we can access it later if needed and also for cpp and java we have to create a file because we have to compile it
+  console.log("init a new c++ container");
+  await pullImage(CPP_IMAGE);
+  const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' >main.cpp && g++ main.cpp -o main && echo '${inputTestCase.replace(/'/g, `'\\"`)}' | stdbuf -oL -eL ./main `; //creating a file so that we can access it later if needed and also for cpp and java we have to create a file because we have to compile it
   //   const pythonDockerContainer = await createContainer(PYTHON_IMAGE, [
   //     "python3",
   //     "-c",
   //     code,
   //     "stty -echo",
   //   ]);
-  const javaDockerContainer = await createContainer(JAVA_IMAGE, [
+  const cppDockerContainer = await createContainer(CPP_IMAGE, [
     `/bin/sh`,
     `-c`,
     runCommand,
   ]);
-  await javaDockerContainer.start();
-  const loggerStream = await javaDockerContainer.logs({
+  await cppDockerContainer.start();
+  const loggerStream = await cppDockerContainer.logs({
     stdout: true,
     stderr: true,
     timestamps: false,
@@ -41,6 +41,6 @@ async function runJava(code: string, inputTestCase: string) {
       res(decodedStream);
     });
   });
-  await javaDockerContainer.remove();
+  await cppDockerContainer.remove();
 }
-export default runJava;
+export default runCpp;

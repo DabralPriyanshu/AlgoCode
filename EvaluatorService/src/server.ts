@@ -4,7 +4,8 @@ import apiRoutes from "./routes/index.js";
 // import addJobToSampleQueue from "./producers/sampleQueueProducer.js";
 // import sampleWorker from "./workers/sampleWorker.js";
 import bullBoardAdapter from "./config/bullboard.config.js";
-import runJava from "./containers/runJavaDocker.js";
+import runCpp from "./containers/runCppDocker.js";
+// import runJava from "./containers/runJavaDocker.js";
 // import runPython from "./containers/runPythonDocker.js";
 const app: Express = express();
 app.use(express.json());
@@ -29,23 +30,40 @@ app.listen(ENV.PORT, () => {
   // `;
   //   runPython(code, input);
 
+  //   const code = `
+  // import java.util.*;
+
+  // public class Main {
+  //     public static void main(String[] args) {
+
+  //         Scanner sc = new Scanner(System.in);
+  //         int input = sc.nextInt();
+
+  //         System.out.println("Input is " + input);
+
+  //         for (int i = 1; i <= input; i++) {
+  //             System.out.println(i);
+  //         }
+  //     }
+  // }
+  // `;
+  //   const inputCase = `10`;
+  //   runJava(code, inputCase);
+
   const code = `
-import java.util.*;
-
-public class Main {
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-
-        System.out.println("Input is " + input);
-
-        for (int i = 1; i <= input; i++) {
-            System.out.println(i);
-        }
-    }
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+int x;
+cin>>x;
+cout<<"Value of x is "<<x<<" ";
+cout<<endl;
+return 0;
 }
+
 `;
   const inputCase = `10`;
-  runJava(code, inputCase);
+  runCpp(code, inputCase);
 });
