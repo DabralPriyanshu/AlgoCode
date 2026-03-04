@@ -8,7 +8,7 @@ import pullImage from "./pullImage.js";
 async function runJava(code: string, inputTestCase: string) {
   const rawLogBuffer: Buffer[] = [];
   console.log("init a new java container");
- await pullImage(JAVA_IMAGE);
+  await pullImage(JAVA_IMAGE);
   const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' >Main.java && javac Main.java && echo '${inputTestCase.replace(/'/g, `'\\"`)}' |java Main `; //creating a file so that we can access it later if needed and also for cpp and java we have to create a file because we have to compile it
   //   const pythonDockerContainer = await createContainer(PYTHON_IMAGE, [
   //     "python3",
@@ -31,7 +31,7 @@ async function runJava(code: string, inputTestCase: string) {
   loggerStream.on("data", (chunk) => {
     rawLogBuffer.push(chunk);
   });
-  await new Promise((res) => {
+  const response = await new Promise((res) => {
     loggerStream.on("end", () => {
       console.log(rawLogBuffer);
       const completeBuffer = Buffer.concat(rawLogBuffer);
@@ -42,5 +42,6 @@ async function runJava(code: string, inputTestCase: string) {
     });
   });
   await javaDockerContainer.remove();
+  return response;
 }
 export default runJava;
