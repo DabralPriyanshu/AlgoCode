@@ -33,24 +33,24 @@ app.listen(ENV.PORT, () => {
   // `;
   //   runPython(code, input);
 
-  const code = `
-  import java.util.*;
+  // const code = `
+  // import java.util.*;
 
-  public class Main {
-      public static void main(String[] args) {
+  // public class Main {
+  //     public static void main(String[] args) {
 
-          Scanner sc = new Scanner(System.in);
-          int input = sc.nextInt();
+  //         Scanner sc = new Scanner(System.in);
+  //         int input = sc.nextInt();
 
-          System.out.println("Input is " + input);
+  //         System.out.println("Input is " + input);
 
-          for (int i = 1; i <= input; i++) {
-              System.out.println(i);
-          }
-      }
-  }
-  `;
-  const inputCase = `10`;
+  //         for (int i = 1; i <= input; i++) {
+  //             System.out.println(i);
+  //         }
+  //     }
+  // }
+  // `;
+  // const inputCase = `10`;
   // runJava(code, inputCase);
 
   //   const code = `
