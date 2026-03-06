@@ -6,4 +6,5 @@ module.exports = {
   REDIS_PORT: process.env.REDIS_PORT || 6379,
   DB_URL: process.env.DB_URL,
   NODE_ENV: process.env.NODE_ENV || "development",
+  PROBLEM_SERVICE_URL: process.env.PROBLEM_SERVICE_URL,
 };
