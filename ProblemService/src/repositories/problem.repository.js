@@ -12,6 +12,7 @@ class ProblemRepository {
         description: problemData.description,
         codeStubs: problemData.codeStubs,
         testCases: problemData.testCases ? problemData.testCases : [],
+        codeStubs:problemData.codeStubs
       });
       return problem;
     } catch (error) {
