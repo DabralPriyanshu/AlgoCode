@@ -1,8 +1,9 @@
 import type { Job } from "bullmq";
 import type { IJob } from "../types/bullMqJob.js";
 import type { SubmissionPayload } from "../types/submissionPayload.js";
-import runJava from "../containers/runJavaDocker.js";
-
+import runJava from "../containers/javaExecutor.js";
+import createExecutor from "../utils/executorFactory.js";
+import { type ExecutionResponse } from "../types/codeExecutorStrategy.js";
 class SubmissionJob implements IJob {
   name: string;
   payload: Record<string, SubmissionPayload>;
@@ -12,18 +13,25 @@ class SubmissionJob implements IJob {
     this.payload = payload;
   }
   handler = async (job?: Job) => {
-    // console.log("Handler of job called");
     console.log(this.payload);
     if (job) {
-      //   console.log(this.payload["1234"].language);
       const key: string = Object.keys(this.payload)[0]!;
       const language: string = this.payload[key]!.language;
-      if (language === "JAVA") {
-        const response = await runJava(
-          this.payload[key]?.code!,
-          this.payload[key]?.inputCase!,
+      const code = this.payload[key]!.code;
+      const inputTestCase = this.payload[key]!.inputCase;
+      const strategy = createExecutor(language);
+      if (strategy != null) {
+        const response: ExecutionResponse = await strategy.execute(
+          code,
+          inputTestCase,
         );
-        console.log("Evaluated response is ", response);
+        if (response.status == "Completed") {
+          console.log("Code executed successfully");
+          console.log(response);
+        } else {
+          console.log("Something went wrong with executing code");
+          console.log(response);
+        }
       }
     }
   };

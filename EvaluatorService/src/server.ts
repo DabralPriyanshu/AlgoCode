@@ -7,7 +7,7 @@ import bullBoardAdapter from "./config/bullboard.config.js";
 import submissionWorker from "./workers/submissionWorker.js";
 import { SUBMISSION_QUEUE } from "./utils/constant.js";
 import addJobToSubmissionQueue from "./producers/submissionQueueProducer.js";
-import runCpp from "./containers/runCppDocker.js";
+import runCpp from "./containers/CppExecutor.js";
 // import runJava from "./containers/runJavaDocker.js";
 // import runPython from "./containers/runPythonDocker.js";
 const app: Express = express();
