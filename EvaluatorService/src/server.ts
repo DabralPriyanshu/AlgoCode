@@ -7,8 +7,8 @@ import bullBoardAdapter from "./config/bullboard.config.js";
 import submissionWorker from "./workers/submissionWorker.js";
 import { SUBMISSION_QUEUE } from "./utils/constant.js";
 import addJobToSubmissionQueue from "./producers/submissionQueueProducer.js";
-// import runCpp from "./containers/runCppDocker.js";
-import runJava from "./containers/runJavaDocker.js";
+import runCpp from "./containers/runCppDocker.js";
+// import runJava from "./containers/runJavaDocker.js";
 // import runPython from "./containers/runPythonDocker.js";
 const app: Express = express();
 app.use(express.json());
@@ -53,22 +53,22 @@ app.listen(ENV.PORT, () => {
   // const inputCase = `10`;
   // runJava(code, inputCase);
 
-  //   const code = `
-  // #include<iostream>
-  // #include<stdio.h>
-  // using namespace std;
-  // int main()
-  // {
-  // int x;
-  // cin>>x;
-  // cout<<"Value of x is "<<x<<" ";
-  // cout<<endl;
-  // return 0;
-  // }
+  const code = `
+  #include<iostream>
+  #include<stdio.h>
+  using namespace std;
+  int main()
+  {
+  int x;
+  cin>>x;
+  cout<<"Value of x is "<<x<<" ";
+  cout<<endl;
+  return 0;
+  }
 
-  // `;
-  //   const inputCase = `10`;
-  //   runCpp(code, inputCase);
+  `;
+  const inputCase = `10`;
+  // runCpp(code, inputCase);
   // submissionWorker(SUBMISSION_QUEUE);
   // addJobToSubmissionQueue({ "1234": { language: "JAVA", inputCase, code } });
 });

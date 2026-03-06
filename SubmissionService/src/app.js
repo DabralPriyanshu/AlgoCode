@@ -1,5 +1,6 @@
 const fastifyPlugin = require("fastify-plugin");
 const servicePlugin = require("./services/servicePlugin");
+const repositoryPlugin = require("./repositories/repositoryPlugin");
 
 /**
  * 
@@ -8,12 +9,16 @@ const servicePlugin = require("./services/servicePlugin");
  @description this method will add all the required plugins
  */
 async function app(fastify, options) {
+  // register repository plugin
+  await fastify.register(repositoryPlugin);
   //register service
-  fastify.register(servicePlugin);
+  await fastify.register(servicePlugin);
   //register cors
-  fastify.register(require("@fastify/cors"));
+  await fastify.register(require("@fastify/cors"));
 
   //register test routes
-  fastify.register(require("./routes/api/api.routes"), { prefix: "/api" });
+  await fastify.register(require("./routes/api/api.routes"), {
+    prefix: "/api",
+  });
 }
 module.exports = fastifyPlugin(app);
