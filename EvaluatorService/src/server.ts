@@ -69,6 +69,6 @@ app.listen(ENV.PORT, () => {
   `;
   const inputCase = `10`;
   // runCpp(code, inputCase);
-  // submissionWorker(SUBMISSION_QUEUE);
+  submissionWorker(SUBMISSION_QUEUE);
   // addJobToSubmissionQueue({ "1234": { language: "JAVA", inputCase, code } });
 });

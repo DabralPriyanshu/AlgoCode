@@ -11,6 +11,7 @@ class PythonExecutor implements CodeExecutorStrategy {
   async execute(
     code: string,
     inputTestCase: string,
+    outputTestCase: string,
   ): Promise<ExecutionResponse> {
     const rawLogBuffer: Buffer[] = [];
     console.log("init a new python container");
