@@ -4,6 +4,7 @@ import type { SubmissionPayload } from "../types/submissionPayload.js";
 import runJava from "../containers/javaExecutor.js";
 import createExecutor from "../utils/executorFactory.js";
 import { type ExecutionResponse } from "../types/codeExecutorStrategy.js";
+import addJobToEvaluationQueue from "../producers/evaluationQueueProducer.js";
 class SubmissionJob implements IJob {
   name: string;
   payload: Record<string, SubmissionPayload>;
@@ -27,7 +28,12 @@ class SubmissionJob implements IJob {
           inputTestCase,
           outputTestCase,
         );
-        if (response.status == "Completed") {
+        addJobToEvaluationQueue({
+          response,
+          userId: this.payload[key]?.userId,
+          submissionId: this.payload[key]?.submissionId,
+        });
+        if (response.status == "SUCCESS") {
           console.log("Code executed successfully");
           console.log(response);
         } else {

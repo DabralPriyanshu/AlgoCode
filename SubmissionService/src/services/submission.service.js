@@ -6,6 +6,7 @@ class SubmissionService {
     this.submissionRepository = submissionRepository;
   }
   async addSubmission(submissionPayload) {
+   const userId=submissionPayload.userId
     const problemId = submissionPayload.problemId;
     const apiResponse = await fetchProblemDetails(problemId);
     if (!apiResponse) {
@@ -38,6 +39,8 @@ class SubmissionService {
         language: submission.language,
         inputCase: apiResponse.testCases[0].input,
         outputCase: apiResponse.testCases[0].output,
+        userId,
+        submissionId:submission._id
       },
     });
     return { queueResponse: response, submission };
